@@ -185,7 +185,7 @@ splice(start, deleteCount, item1, item2, /* …, */ itemN)
 ```js
 
   const numbers = [1, 2, 3, 4, 5]
-  numbers.splice()
+  numbers.splice(0)
   console.log(numbers)                // -> remove all items
 
 ```

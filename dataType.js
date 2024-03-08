@@ -42,3 +42,17 @@ console.log(firstName.concat(lastName))
 let str = new Date()
 
 console.log(str.getDate())
+
+
+
+let arr_1 = [1,2,3,4,5]
+let arr_2 = ['a','b','c','d','e']
+
+for( const num of arr_1){
+    console.log(num + " ")
+    for(const letter of arr_2){
+        if(letter == 'd') break
+        console.log(letter)
+        
+    }
+}

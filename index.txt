@@ -1,0 +1,4 @@
+0. scope
+1. loops
+2. functions
+3. objects
