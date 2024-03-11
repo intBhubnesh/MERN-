@@ -103,3 +103,64 @@ console.log(user)
 console.log(user.jointAccount.accHolder)
 
 
+// object concatenation 
+
+// i have a separate object which i need to merge with the original object 
+const userDetails = {
+    userID : '123abc',
+    address : "BBRS Orissa",
+    phoneNo : '9923831913',
+    job : 'Assistant teacher',
+    married : false 
+}
+
+// 1. assign() method of Object class 
+// assign(target_obj, obj_1,obj_2,...) -> it don't modify the original object 
+//but, return the modified object so we need to store them in the user object
+user = Object.assign(user, userDetails)
+
+console.log(user) // access all the values of the userDetail object  
+
+
+// 2. spread operator(...) -> this is updated syntax for the object concatenation 
+let testObject = new Object() 
+testObject = {...user}
+
+ console.log(testObject)
+
+// example 2 
+let object_1 = {
+    name : "object",
+    age : 12
+}
+
+const name =  Symbol()
+let object_2 = {
+    [name]: "object",
+    method : function(){
+        return "hello world"
+    }
+}
+
+const object_3 = {...object_1,...object_2}
+
+var text = 'String'
+// console.log(object_3)
+
+// methods of Object class
+// keys() - static method of the Object class, Return a array of keys in the object 
+console.log(Object.keys(user)) // keys() is a static function of Object class  
+// console.log(user.keys()) // static function can only be accessed by the class 
+
+
+// values() - static method of the Object class, Return a array of values in the object 
+console.log(Object.values(user))
+
+// entries() - static method of the Object class, Return a array of key-value pair in the object
+console.log(Object.entries(user))
+
+// hasOwnProperty() - method of the Object class, Return a boolean value if the key is present in the object    
+console.log(user.hasOwnProperty('userName')) // true
+
+
+
