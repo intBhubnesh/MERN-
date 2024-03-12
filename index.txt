@@ -1,4 +1,16 @@
 0. scope
-1. loops
-2. functions
-3. objects
+1. DataType
+2. Numbers and Math liberary
+3. String and String methord
+4. Boolean
+5. Undefined
+6. Null
+7. Operators
+8. window methord
+9. Date Object
+10. Conditional Statement
+11. Array and Array methord
+12. loops
+13. functions
+14. objects
+15. Deconstructor and Spread 

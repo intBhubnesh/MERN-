@@ -58,7 +58,7 @@ console.log(obj_2.isLoggedIn)
 Object.freeze(obj_2) // pass the object as argument which you want to make the freezed
 obj_2.isLoggedIn = false 
 
-console.log(obj_2) // true - it remain unchanged 
+console.log(obj_2.isLoggedIn) // true - it remain unchanged 
 
 // Now lets create a new object as owr old object is freezed
 let user = new Object()
@@ -164,3 +164,43 @@ console.log(user.hasOwnProperty('userName')) // true
 
 
 
+const person = {
+    firstName: "Bhubnesh",
+    lastName: "Maharana",
+    age: 24,
+    country: "India",
+    city: "Bhubneshwar",
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Node",
+      "MongoDB",
+      "Python",
+      "D3.js",
+    ],
+    getFullName: function () {
+      return `${this.firstName} ${this.lastName}`;
+    },
+  };
+  person.nationality = "Indian";
+  person.title = "teacher";
+  person.skills.push("Figma");
+  person.skills.push("Premier Pro");
+  person.isMarried = false;
+  
+  person.getPersonInfo = function () {
+    let skillsWithoutLastSkill = this.skills
+      .splice(0, this.skills.length - 1)
+      .join(", ");
+    let lastSkill = this.skills.splice(this.skills.length - 1)[0];
+  
+    let skills = `${skillsWithoutLastSkill}, and ${lastSkill}`;
+    let fullName = this.getFullName();
+    let statement = `${fullName} is a ${this.title}.\nHe lives in ${this.country}.\nHe teaches ${skills}.`;
+    return statement;
+  };
+
+  const e = Object.entries(person)
+  console.log(e)
