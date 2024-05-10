@@ -20,7 +20,7 @@ console.table([sub_string_1,sub_string_2])
 console.log(name.split(" "))
 
 let string = 'JavaScript'
-
+a
 console.log(string.includes('Java')) // True 
 console.log(string.includes('java')) // False
 
@@ -32,7 +32,7 @@ console.log(string.indexOf('java')) // a
 
 console.log(firstName.concat(lastName)) 
 
-// alert(), promt(), confirm()
+// alert(), promt(),    ()
 
 // alert("hello world")
 // prompt("Fuck You")

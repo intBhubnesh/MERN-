@@ -152,6 +152,8 @@ Normal Function:
 Requires a return statement to return a value.
 Arrow Function:
 If the function body consists of a single expression, it is implicitly returned without needing a return statement.
+
+
 Function name:
 
 Normal Function:

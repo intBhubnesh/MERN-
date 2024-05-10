@@ -1,39 +1,74 @@
-// let - local scope
-let a = 10; // gloabl copy of a
+// let 
+let a = 10
 
-function fun() {
-  console.log(a); // global copy of a
+const b = 20 
 
-  if (true) {
-    let a = "Hello"; // local copy of a
-    console.log(a);
+var c = 30
+
+console.log(a,b,c)
+
+// twist in story 
+{
+  //scope -> real game changer  
+}
+
+// TYPES OF SCOPING 
+
+// global scope
+
+{
+  // block scope 
+}
+
+function fun(){
+  // function scope 
+}
+
+
+// DIFFERENCE BETWEEN VAR AND LET
+
+if(true){
+  let a = 1
+  const b = 2
+  var c = 3
+  console.log('block scope :', a,b,c);  // 1 2 3
+}
+
+console.log('global scope :', a,b,c);  // 10 20 3
+
+
+// SCOPE LEVEL
+
+let user = 'Bhubnesh Maharana'
+
+function fun(){
+  let userJob = 'Software Engineer'
+  function greet() {
+    let greet = 'Hello'
+    console.log(`${greet} ${user} ${userJob}`)
   }
-}
-fun();
-console.log(a); // global copy of a
-
-// var
-var c = "JavaScript"; // declaring a variable without let or const make it available in window object and this found anywhere
-if (true) {
-  console.log(c);
-  if (true) {
-    var c = "C++"; // dont creat a local copy, but modify the global copy
-    console.log(c);
-  }
+  console.log(`${user} ${userJob}`)
+  greet()
 }
 
-console.log(c, b); // accessible
+fun()
 
-// difference between let and var 
-var d = 1;
-let e = 2;
 
-if (true) {
-  var d = 10;
-  let e = 20;
-  console.log(d); // Outputs 10
-  console.log(e); // Outputs 20
+// HOISTING
+
+// console.log(variable) // can't access the variable before declaration
+// let variable = 10 
+
+
+// Similarlly function expression can't be hoisted
+
+console.log(fun()) 
+function fun(){
+  return 10
 }
 
-console.log(d); // Outputs 10 (global variable a was reassigned)
-console.log(e); // Outputs 2 (local variable b is block-scoped)
+// console.log(notFun())
+// let notFun = function(){
+//   return 12
+// }
+
