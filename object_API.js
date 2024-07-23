@@ -22,7 +22,8 @@ console.log(n); // Rahul
 
 // JSON -> request and response from the server is in JSON format, we need to convert it into the object to use it in the program
 // JSON is a lightweight data interchange format
-{
+[
+    {
     
         userName: "Rahul",
         email: "rahul@gmail.com",
@@ -31,6 +32,7 @@ console.log(n); // Rahul
         married: false,
 
 }
+]
 
 // JSON looks similar to the object but it is not the same as the object
 
@@ -43,14 +45,14 @@ console.log(n); // Rahul
         phoneNo: "9923831913",
         job: "Assistant teacher",
         married: false,
-    }
+    },
     {
         userName: "Bhubnesh",
         email: "bhubnesh@gmail.com",
         phoneNo: "9923831913",
         job: "Assistant teacher",
         married: false,
-    }
+    },
     {
         userName: "Mohit",
         email: "mohit@gmail.com",
