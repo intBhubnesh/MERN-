@@ -1,0 +1,98 @@
+creat a react app 
+
+
+react liberary 
+- react-dom ( used for the web development ) 
+- react-native ( used for the app development )
+
+Package Manager 
+ - npm - node pacakge manager 
+         used to install the dependency 
+ - npx - node pacakge executor 
+         it exucutes the dependencies without installaing them locally 
+         avoid dependecy pollution
+
+
+Creating a raect app
+
+1. npx create-react-app react
+    it install many dependency in large bundel size 
+    due to which our application bcm bulky 
+
+2. vite and parcel - utility 
+    its doesnot contain the node modules and tesing liberaries are missing 
+    its fast 
+
+
+Anatomy of react app 
+
+first thing when we enter the react project is to go through the package.json which will give all the external  idea about the project 
+1. package.json - contain all the dependencies and its versions
+
+    - name : name of the project 
+    - vesion : version of your project .i.e.MAJOR.MINOR.PATCH
+    - private : avoid accidental publishing of the private project 
+    - dependencies : external liberaries used in the project 
+        a. tesing liberaries 
+                "@testing-library/jest-dom": "^5.17.0",
+                "@testing-library/react": "^13.4.0",
+                "@testing-library/user-event": "^13.5.0",   
+
+        b. version of react and other liberaries
+                "react": "^18.3.1",
+                "react-dom": "^18.3.1",  : used for the web development
+                "react-scripts": "5.0.1",  : include scripts for staring the project and env config 
+                "web-vitals": "^2.1.4" : used to give the performance of the website 
+            
+    - scripts : it involve nuber of scripts to start the project 
+                "start": "react-scripts start", : start the development server, which has hot-reloding to render the changes on browser immediatly
+                "build": "react-scripts build", : optimiste the project for the production server for seployment 
+                "test": "react-scripts test", : used to execute the test caeses on the react project 
+                "eject": "react-scripts eject" : terminate out of the react application to move to some other framework of system call 
+
+    - eslintConfig : it provide efficient debugging in syntax error which is a extention of the main react liberary
+    - browserslist : list of the browser the project support for development
+        a. development : development server is supported in which browsers 
+        b. production  : production server supported in which browsers 
+
+    - devDependencies : liberaries used only in development but which buildingfor production they are not added to dependecy 
+
+
+lets start npx react project 
+2. npm run start : a server will be launched by the webpack or similar application
+
+  Local:            http://localhost:3000  -> local hosthost acces your device port 
+  On Your Network:  http://10.216.19.38:3000  -> the ip address of your machine given by router, any other dives over the same network can see the application
+
+lets try to build our application
+3. npm run build : it creat a build direcctory within the project where it will optimise our complet react project to the optimised js 
+                    then sreve this build file for deployment process 
+
+
+lets start our vite react project 
+
+here the node modules are missing, which are required to run our project 
+1. npm i / npm indtall : install the node modules 
+
+2. npm run dev ; start the development server 
+
+
+lets agin move back into the npm react project 
+here we will go into src 
+
+! "rm -rf logo.svg setupTests.js reportWebVitals.js index.css App.css App.test.js ": delete all the files except App.js and index.js 
+! "remove few lines of code form the App.js and index.js
+
+
+let jump back to vite react project 
+here we can see the same file 
+
+! "rm -rf index.css App.css assets" : remove the unecessary files 
+now here you see 
+    main.jsx = index.js
+    App.jsx = App.js
+
+! react being a liberary offer some fexibility for naming convection
+
+
+
