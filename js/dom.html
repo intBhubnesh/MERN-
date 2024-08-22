@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body style="background-color: #212121; color: whitesmoke;">
+
+    <h1 id="heading" class="element_1 heading">Welcome to the DOM <span style="display: none;">this id secreat message :
+            Messi is the GOAT.</span> </h1>
+    <p class="content">all the web pages are under the hood Document Object Model</p>
+    <ul id="list" class="list">this is a list
+        <li class="list-item">one</li>
+        <li class="list-item">two</li>
+        <li class="list-item">three</li>
+        <li class="list-item">four</li>
+        <li class="list-item">five</li>
+        <li class="list-item">six</li>
+    </ul>
+    <input type="password" name="password" id="">
+
+    <ul class="languageList">
+
+    </ul>
+</body>
+<script>
+    const parent = document.getElementById('list')
+    console.log(parent)
+
+    const child = parent.children
+
+    console.log(parent.children)  // return the HTMLcollection of the nested elements in the selected elements 
+    console.log(parent.children[1].textContent)
+
+    for (let i = 0; i < child.length; i++) {
+        console.log(child.textContent)
+    }
+
+    // return the first Element child 
+    const firstChild = parent.firstElementChild // <li class="list-item">
+    const lastChild = parent.lastElementChild // <li class="list-item">
+
+    // let modify them 
+    firstChild.style.cssText = "color: pink; background-color: black;";
+
+    lastChild.style.color = "orange"
+
+
+    // return NodeList of the child nodes 
+    console.log(parent.childNodes)
+
+    // return the first child node in the tree
+    console.log(parent.firstChild)   // #text "this is a list \n            "      
+
+    // return the last child node in the tree
+    console.log(parent.lastChild)   // #text "\n        "
+
+    console.log(parent.nextElementSibling) // <input id="" type="password" name="password
+    console.log(parent.parentElement)
+
+
+    // create a footer and insert it into DOM
+
+    const footer = document.createElement('div')
+
+    // access and assign the attribute to the element 
+    footer.id = "footer"
+    footer.className = "section"
+
+    // get the attributes
+    console.log(footer.getAttribute("id"))
+
+    // assign custom attributes to the element 
+    footer.setAttribute("name", "footer_section")
+
+    // add some content inside the footer 
+    footer.innerHTML = "this is the footer section created using the innerHTML"
+
+    // using the creatTextNode() 
+    const textContent = document.createTextNode("this is the footer section created by the creatTextNode")
+    footer.appendChild(textContent)
+
+    // lets appent our element to the DOM
+    document.body.appendChild(footer)
+
+    function addLanguageOptimised(language) {
+        
+    //  ! appendChild() directly add the node at the end of the tree without traversing which is optimised way 
+        
+        // hold the language in a textNode 
+        const langName = document.createTextNode(language)
+        
+        // crate a list item to append to the parent 
+        const item = document.createElement('li');
+        item.appendChild(langName)
+        item.style.color = "orange"
+                
+        // fetch the parent and  appent the list item
+        document.querySelector('.languageList').appendChild(item)
+
+    }
+
+    function addLanguage(language) {
+
+        // ! as the innerHTML traver to the end of the treee to add the node, thus its not optimised for lange data and tree or DOM
+
+        // creat the list element
+        const li = document.createElement('li')
+
+        // append the language to the list iteam 
+        li.innerHTML = `${language}`
+        li.style.color = "pink"
+
+        // appent the element to the list 
+        document.querySelector('.languageList').appendChild(li)
+
+    }
+    // const languages = ['java', 'pyhton', 'cpp', 'go', 'rust', 'javascript']
+    // languages.forEach((li) => addLanguage(li));
+    
+    addLanguage('go')
+    addLanguageOptimised("cpp")
+
+    // aceess the DOM elements
+    const list = document.querySelector('.languageList')
+    
+    const firstItem = list.firstElementChild
+    let lastItem = list.lastElementChild
+    
+    // update the DOM elements
+    firstItem.innerHTML = "javascript"
+    lastItem.outerHTML = "<li> typescript </li>"
+
+    const newIteam = document.createElement('li')
+    newIteam.textContent = "C"
+
+    // node.replaceWith(_newNode_) - replace the node with the newNode in the DOM
+    firstItem.replaceWith(newIteam)
+    
+    // delete the DOM element 
+    // parent.removeChild(_childNode_) : it remove the child node from the tree, parent as the root node and return the reference 
+    const deleted = list.removeChild(newIteam)
+    
+    // remove() - it remove the node from the tree
+    lastItem = list.querySelector("li:nth-child(1)")
+    lastItem.remove()
+
+</script>
+</div>
+
+</html>

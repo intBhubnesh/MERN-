@@ -1,0 +1,394 @@
+
+
+Part 1  : Introduction to DOM 
+
+let us start by creating a html file 
+    1. code ./DOM.html 
+
+    2. here we will add come content
+        <h1 id="heading">Wolcome to the DOM</h1>
+        <p class="content">all the web pages are under the hood Document Object Model</p>   
+
+    > here we need to understan two things 
+        - document object 
+        - event handlers 
+
+    ! now before moving any further to creat our own web page
+        lets visit a wikipidia page and look how document os that page look anlong with its properties 
+
+        a. inspect and enter the console 
+        b. console.log(window) 
+            here u can find a global propertie named document 
+            window : it is the object with hold the browser window and has various proreties (meta data , html, css etc)
+        c. console.log(window.document) or console.log(document)
+            here we will 
+            document : it hold the html structure of the web page in a tree structure 
+                        using this we name manupulate the structure of the webpage 
+
+            ! let draw the structure that dom structure
+
+                window
+                  ├── document < methords, properties etc >
+                         ├── html
+                               ├── head
+                                     ├── metadata
+                                     └── links
+                               
+                               ├── body
+                                     ├── div 
+                                          ├── h1 < class >   
+                                          └── p < calss>
+
+                ? why exactly wee need this dom 
+                ans. its simple !
+                        it will allow us to grab diffrent tags by there id or class or group 
+                        we can also store them or  modify them 
+
+    3. lets try to acces  html page element in the browser console and test out some of the document methords
+
+
+        a. getElementById() : return the complet tag structure, content and neted elements
+            
+            document.getElementById("heading") //         <h1 id="heading">Wolcome to the DOM</h1>
+            ! now lets update the valu to my name 
+                for that we need to use the innerHTML methord
+                here innerHTML return the content with in the selected element, in our case it "Welome to DOM"
+
+                document.getElementById("heading").innerHTML = " Bhubnesh Maharana "
+
+        ! congrats 
+            we have succesfully manupulated the website dom using the document methord
+
+            
+        
+
+
+Part 2 : documnet methords 
+
+now here lets dive deep into the methords of the document object
+
+! before going into the methords lets store the element in a variable so we don't have to repetedly write document.getElementById('heading)
+    const heading = document.getElementById('heading')
+
+    a. getElementById()
+        1.  innerHTML : retuen the content the selected element is holding 
+                        heading.innerHTML -> Welome to DOM
+        2.  id : return the id 
+                 heading.id -> "heading"
+        3.  className : return the class list of the element in string format 
+                        heading.className -> "element_1 heading"
+                        ! on the backend everywhere className is used, 
+                            the class of the html is stored in the className, as it the default parameter of the element
+                            but in html only we use the class, everywhere else its className
+        4.  classList : return the class list of the element in array format
+                        heading.classList -> ["element_1", "heading"]
+        5.  getAttribute(_key_) : return the value of the key 
+                                  heading.getAttribute(id) -> "heading"
+        6.  setAttribute(_key_, "value") : it overwrite the value of the key 
+                                            heading.setAttribute(id, "title") -> overwrite the id value 
+        7.  style._key_ = '_value_' : add the style to the element, where we tell which propertie needs to be updated 
+                                        heading.style.backgroundColor = "red" -> change the backgroundColor to red 
+        8.  access the content of the element
+            ! lets add few more code before goin into explaination 
+               <h1 id="heading" class="element_1 heading">Welcome to the DOM <span style="display:none;">this id secreat message : Messi is the GOAT.</span> </h1>
+
+               i.  textContent : it access the hidden text and return that 
+                                    heading.textContent ->  "Welcome to the DOM this id secreat message : Messi is the GOAT. "
+              ii.  innerText : it aware of styling so it don't return the hidden text
+                                heading.innerText -> "Welcome to the DOM"
+             iii.  innerHTML : it return all the content within the element including tags and getAttributes
+                                heading.innerHTML -> 'Welcome to the DOM <span style="display: none;">this id secreat message : Messi is the GOAT.</span> ' 
+
+            ! all of the above methords return the same value, but the way they access and return are diffrent
+
+    b. querySecetor : return the first element in the context that match the css_selector
+        ! we will add few more code before going dep into the querySecetor
+                    <ul class="element_3">this is a list 
+                        <p>this is the list content</p>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                    </ul>
+                    <input type="password" name="password" id="">
+
+                a. select a id : document.querySecetor("#_id_name_)
+                b. select a class : document.querySecetor("._class_name_)
+                c. select a tag : document.querySecetor('div')
+                d. select by name : document.querySecetor('input[name='password']')
+                e. select the nth child : document.querySecetor('li:nth-child(n)')
+
+        # lets use the above selector and make the 5th li element backgroundColor(red) and padding(x-5px y-15px) and add a id and change the text 
+            query : const list_item_5 =  document.querySecetor('li:nth-child(5)')
+                    list_item_5.style.backgroundColor = "red"
+                    list_item_5.style.padding = "5px 15px"
+                    list_item_5.textContent = "Bhubnesh"
+                    list_item_5.className = "name"
+            
+        ! wallah done XD
+
+
+
+    c. querySecetorAll : it return the NodeList which contain list of the specified group of selector 
+        ! NodeList : it is a interface similar to the array but it dont have the map() function 
+                        due to which we cant use it like array in every case
+                > but we can use the forEach() let see how 
+
+                        make the color of all the li element pink and bg = #21
+                        const li_list = document.querySecetorAll('li')
+                        li_list.forEach( (li) => {
+                            li.style.backgroundColor = "#21"
+                            li.style.color = "pink"
+                        })
+
+                ! note here somtimes we fetch the element by querySecetorAll then we cant apply the style properties directly 
+                    even though only one element is ther ein the node list 
+                    instead we have to follow the NodeList convections 
+
+                        li[0].style.backgroundColor = "black"
+
+
+        @Doc : Although NodeList is not an Array, it is possible to iterate over it with forEach(). It can also be converted to a real Array using Array.from().
+
+    ! before moveing to next section lets add class to all of our li tags 
+            <li class="list-item">one</li>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+            <li class="list-item">five</li>
+            <li class="list-item">six</li>
+
+    d. getElementByClassName : it retur the html collection of group of the selection getElementByClassName
+
+        @Doc : An HTMLCollection in the HTML DOM is live; it is automatically updated when the underlying document is changed. For this reason it is a good idea to make a copy (e.g., using Array.from) to iterate over
+
+                i. store the HTML collection into a variable
+                    cont temp_li_class_list = document.getElementByClassName('list-item')
+                    cost li_class_list = Array.from(temp_li_class_list)
+
+               ii. now modify the element using forEach() or map()
+                    li_class_list.forEach( (classLi) => {
+                        classLi.style.color = "orange"
+                    })
+
+    XD  congrats we have learnt how to manupulate the DOM using different methords
+
+    ~ Task -  go to wikipidea page make all the h3 tag color red and apply previously learned concepts 
+                const list = document.querySelectorAll('h3')
+                list.forEach( (li) => {
+                  li.textContent = "bhubnesh"
+                }) 
+
+
+Part 3 : traversing the DOM
+
+now we have learned how to manupulate the DOM in the browser console, lets move to the javascript 
+
+    ! we will add some elements in the old DOM.html file 
+        <ul id="list" class="list">this is a list 
+            <li class="list-item">one</li>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+            <li class="list-item">five</li>
+            <li class="list-item">six</li>
+        </ul>
+
+    ! lets first get the list into a variable, so we can easily access the element
+        const list = document.getElementById('list')
+
+    a. children : this is a read-only property of a element which hold all the nested elements in the HTMLCollection
+                    console.log(list.children) 
+                
+            ! being a list node we cant itterate the HTML collection using any methord
+                we need to use the for loop 
+            ! we can;t modify these properly only acces these 
+
+                for(let i =0; i<list.size() ; i++){
+                    i.style.color = "pink"
+                }
+
+        a1. firstElementChild : return the first child element  
+                                const firstChild = parent.firstElementChild // <li class="list-item">
+
+        a2. lastElementChild : return the last child element
+                                const lastChild = parent.lastElementChild // <li class="list-item">
+
+            ! let modify them 
+                firstChild.style.cssText = "color: pink; background-color: black;";
+                lastChild.style.color = "orange"
+
+        a3. nextElementSibling : read-only property of element, that return the immediate next element on the same level
+                                    parent.nextElementSibling ->     <input id="" type="password" name="password
+
+    
+    b. childNodes : read-only proprty of Node element, that return the live NodeList of the child element
+        @Doc : The NodeList being live means that its content is changed each time new children are added or removed. 
+        @Doc : Browsers insert text nodes into a document to represent whitespace in the source markup.
+                i.e. herefore a node obtained, for example, using Node.childNodes[0] may refer to a whitespace text node rather than the actual element the author intended to get. 
+
+                ! let try to print the childNodes for our ul element
+                    parent.childNodes -> NodeList(13) [ #text, li.list-item, #text, li.list-item, #text, li.list-item, #text, li.list-item, #text, li.list-item
+                                                , … ]
+                                                ​
+                                                0: #text "this is a list \n            "​
+                                                1: <li class="list-item">​
+                                                2: #text "\n            "​
+                                                3: <li class="list-item">​
+                                                4: #text "\n            "​
+                                                5: <li class="list-item">​
+                                                6: #text "\n            "​
+                                                7: <li class="list-item">​
+                                                8: #text "\n            "​
+                                                9: <li class="list-item">​
+                                                10: #text "\n            "​
+                                                11: <li class="list-item">​
+                                                12: #text "\n        "
+                                                ​
+                                                length: 13
+
+                ! now we can understand how everly element including line break and comments are one node in DOM structure 
+
+             b1. firstChild : return the first child node in the tree, taking selected node as the root
+                                     console.log(parent.firstChild)   // #text "this is a list \n            "      
+            
+             b2. lastChild :  return the last child node in the tree, taking selected node as the root 
+                                     console.log(parent.lastChild)   // #text "\n        " 
+
+
+            ! now we understand how ducument object store all the element in our HTML as a Node
+                then we use the react-DOM to make the ducument object model(tree structure)
+
+            ! then we used different methors to asccess the child node in a tree 
+
+            ! now we need to understand that element and nodes are different entity 
+
+                @Doc : Element is a specific type of Node that represents an HTML or XML element. 
+                       While all Elements are Nodes, not all Nodes are Elements. 
+                       Another key difference is that Elements have additional properties and methods that are specific to elements.
+
+
+    c. parentElement : it is the read-only property of the Node element, that return the parent of the selected node 
+            @Doc : The read-only parentElement property of Node interface returns the DOM node's parent Element, or null if the node either has no parent, or its parent isn't a DOM Element
+
+                       console.log(parent.parentElement) -> <body>
+
+
+    ! congratulations we have learn how to travers in the DOM and get the child element of parent and vise-versa 
+
+
+
+Part 4 : adding new element to DOM 
+
+lets creat a html element and store it in a variable 
+
+
+    1. creatElement(_tagName_) : create a HTML element specific by tagName  
+         const footer = document.creatElement(div)
+
+         ! this element hava all the attributes and properly of the assigned element
+            footer.id = "footer"
+            footer.className = "section"
+
+            ! first the key fetched then the value is overwritten 
+    
+    2. setAttribute(_attributeName_, _attributeValue_) :  method of the Element interface sets the value of an attribute on the specified element. 
+                                                            If the attribute already exists, the value is updated
+    3. getAttribute(_attributeName_) : get the attribute value 
+
+
+    ! now lets add some content iside out footer 
+
+    4. 
+        4a. using innerHTML/textContent/innerText 
+                        footer.innerHTML = "this is the footer made by innerHTML"
+
+        4b. using createTextNode() : Creates a new Text node   
+                        const textContent = documnet.createTextNode('this is the footer created by the creatTextNode')
+                        footer.appenChild(textContent)
+
+        ! In general, lean towards createTextNode() for adding simple text content, and reserve innerHTML for situations where HTML structure is required.
+
+
+    5. appendChild() : amethod of the Node interface adds a node to the end of the list of children of a specified parent node.
+                        document.body.appendChild(footer)
+
+
+    ! congratulations , we have succesfully created and added a element to the DOM 
+
+
+Part 5 : create, access, update and Removal of the DOM Element
+
+    ! lets creat a unordered list of clasName="language", 
+      then create a function to add languages to that unordered list asa a list item
+
+      1. function defination
+
+            function addlanguage(language){
+
+                a. create the li element
+                    const li = document.creatElement('li')
+
+                b. insert the language into the list 
+                    i. using innet HTML (not optimised)\
+                        ! so innerHTML traverse to the end of th tree then insert the node 
+                        li.innerHTML = `${language}`
+
+                   ii. use the createTextNode() (optimised)
+                        ! it directly append the textNode to the end of the tree
+                        li.appendChild(document.createTextNode(language))
+
+                    ! the optimisation is not significant in our case as our DOM is small and we r appending only one element
+                        but, this make a significant difference when workin on production project with huge DOM and humongous data
+    
+                c. append the li element to the ul list
+                    document.querySecetor('language').appenChild(li)
+            }
+
+      2. now lets make the function call to to add the element to the list and render them 
+            addlanguage('javaScript')
+
+    ! wallah, we have succesfully added elements to dom 
+
+
+    ! now lets edit the the content we have added 
+
+      3. access the the element using the nth child 
+            const secoundList = document.querySecetor('language')
+            const numItems =    list.childElementCount
+            const firstItem = list.querySecetor('li:nth-child(1))
+            const lastItem = list.querySecetor('li:nth-child(numItems)')
+
+            a. replcae the inner content usinf textContent/ innerHtml/ innerText
+                firstItem.innerHTML = "CPP"
+            
+            b. overwrite the node with new element  
+                lastItem.outterHTML = "<li> Python </li>"
+                   ! here outerHTML overwrite the the complete DOM node thus the lastIteam is pointing to old value 
+
+            c. replace with the new node 
+                const newItem = document.creatElement('li')
+                newIteam.innerHTML = "Golang"
+                newItem.replaceWith(newIteam)
+                   !  now the DOM is updated with the newIteam, now firstItem no longer paert of the DOM 
+
+    ! Duno, now we have learned how to update the DOM
+
+    ! now lets learn how to delet the elements from the DOM
+
+        a. remove() : method removes the element from the DOM.
+                        const delItem = list.children[0]
+                        delItem.remove()
+
+        b. removeChild(_node_) : method of the Node interface removes a child node from the DOM and returns the removed node.
+                                    cosnt delItem = list.firstElementChild
+                                    const tempIteam = list.removeChild(delItem)
+
+                @Doc : As long as a reference is kept on the removed child, it still exists in memory, 
+                        but is no longer part of the DOM. It can still be reused later in the code. 
+
+    ! Congrats, we have learnt how to delet the element from node  
+    
+End of DOM 
